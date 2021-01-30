@@ -8,7 +8,7 @@ import os
 
 # Import the data set
 DATA_DIR = 'data'
-data_path = os.path.join(DATA_DIR, 'data.csv')
+data_path = os.path.join(DATA_DIR, 'purchase_data.csv')
 df = pd.read_csv(data_path)
 df['spend'] = df['price'] * df['quantitiy']
 df = df[['date', 'place', 'spend']]

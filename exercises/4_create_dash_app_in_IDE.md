@@ -41,7 +41,7 @@ import os
 
 # Import the data set
 DATA_DIR = 'data'
-data_path = os.path.join(DATA_DIR, 'data.csv')
+data_path = os.path.join(DATA_DIR, 'puchase_data.csv')
 df = pd.read_csv(data_path)
 df['spend'] = df['price']*df['quantitiy']
 df = df[['date', 'place', 'spend']]
@@ -92,7 +92,7 @@ fig = px.scatter_mapbox(df,
 
 # How did I spend my money?
 
-data_path = os.path.join(DATA_DIR, 'data.csv')
+data_path = os.path.join(DATA_DIR, 'purchase_data.csv')
 df = pd.read_csv(data_path)
 df["hour_int"] = pd.to_datetime(df["hour"], format="%H:%M", errors='coerce').apply(lambda x: int(x.hour))
 df_heatmap = df.pivot_table(index="date",values="price",columns="hour", aggfunc="sum").fillna(0)
