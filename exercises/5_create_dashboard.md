@@ -1,11 +1,39 @@
-# Create a Covid-19 dashboard using Dash
-It is likely to be easier if you create a new project for this activity. This will give you practice in structuring a Dash project from scatch.
+# Create an environmental dashboard for London using Dash
 
-The task is to create a Covid dashboard with a chart visualising the data from the [COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://github.com/CSSEGISandData/COVID-19).
+The task is to create an environment dashboard for London using data from the London Datastore.
 
-Have a look at [their dashboard](https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6) and try to recreate one of the charts.
+Go to the London Datastore and select the environment logo to recreate one or two of the charts.
 
-You might want to start with a more straightforward chart such as the bar chart of the daily cases from February to August, and then try one of the more complex charts.
+![London Datastore](../assets/lds.png)
+
+The first chart shown on the website was re-created in exercise 3 in this repository and the data is already downloaded
+in the data directory. To find the data for the other charts, click on the **i** symbol in the top right of the charts 
+shown on the London Datastore website and it will give you details of the chart including a hyperlink to the source data.
+
+<img src="../assets/i.png" alt="info symbol" style="float:left;padding-right:20px"/>
+
+<img src="../assets/household_waste.png" alt="household waste chart info" style="float:left;padding-right:20px"/>
+
+
+## Create a new project
+
+It is likely to be easier if you create a new project in your IDE for this activity to avoid any conflict with the
+existing `app.py`.
+
+This will also give you practice in structuring a Dash project from scatch.
+
+A typical structure could be:
+
+```
+dash_app_name/
+  /assets/  # An optional directory that contains CSS stylesheets, images, or custom JavaScript files. Dash will automatically serve all of the files that are included in this folder.
+      app.css  
+  /data/  # An optional directory that contains the data files (unless this is accessed via an API or database server).
+      data.csv
+  app.py  # Contains your Dash app code and code to run the server. Sometimes named dash.py or dashboard.py.
+  .gitignore  # The files and folders to be ignored in git.
+  requirements.txt  # The app's python dependencies.
+```
 
 A guide as to the likely steps:
 
@@ -13,8 +41,10 @@ A guide as to the likely steps:
 2. Create a venv
 3. Install required packages in the venv e.g. Dash, pandas
 4. Download the data and save in a 'data' directory
-5. Find css to use (e.g. add a css file to the assets, use a CDN hosted version, use the dash-bootstrap-components library)
+5. Find css to use (e.g. add a css file to the assets, use a CDN hosted version, use the dash-bootstrap-components
+   library)
 6. Create an app.py in which you:
+
 - Import the required libraries
 - Import the dataset
 - Create the app instance
@@ -22,9 +52,11 @@ A guide as to the likely steps:
 - Create the layout
 - Run the server
 
-Note: You might want to create an initial app.py with no CSS, data or figures and simply an html p element with 'Hello, World' in the layout. This would allow you to test your app runs with minimal coding.
+Note: You might want to create an initial app.py with no CSS, data or figures and simply an html p element with 'Hello,
+World' in the layout. This would allow you to test your app runs with minimal coding.
 
-If you develop your app incrementally it may help you to pinpoint errors.  For example, next add CSS and stop and restart the app. Then add data and figure and the restart the app again. 
+If you develop your app incrementally it may help you to pinpoint errors. For example, next add CSS and stop and restart
+the app. Then add data and figure and the restart the app again.
 
 ...and so on...
 
