@@ -16,10 +16,10 @@ Go the the `exercises` directory for the exercise instructions.
 
 The following are included:
 
-- `1_intro_plotly_graph_objects.ipynb`
-- `2_create_lollapalooza_charts_go.ipynb`
-- `3_intro_plotly_dash.ipynb`
-- `4_create_dash_app_in_IDE.md`
+- `1_intro_plotly_graph_objects.ipynb` (video on Moodle)
+- `2_create_lollapalooza_charts_go.ipynb` 
+- `3_intro_plotly_dash.ipynb` (video on Moodle)
+- `4_create_dash_app_in_IDE.md` (video on Moodle)
 - `5_create_dashboard.md`
 
 ### Setup
