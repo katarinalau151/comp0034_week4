@@ -33,3 +33,11 @@ or use the online documentation from your IDE.
 4. Install the requirements from requirements.txt.
 
 There is no Flask app this week so you do not need to check the Flask configuration.
+
+#### Using Binder for the jupyter notebook activities
+
+To use Binder for the jupyter notebook activities go to [https://mybinder.org](https://mybinder.org)
+
+Enter the URL of your repo in GitHub classroom (you will need to accept the assignment in GitHib classroom which creates a copy of the repo in your GitHub account in the comp0035 organisation for you).
+
+Press 'launch' and wait a few minutes while Binder sets up your environment. 

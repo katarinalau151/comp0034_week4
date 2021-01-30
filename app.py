@@ -1,4 +1,4 @@
-# Import the required libraries.
+# Import the required libraries
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -30,4 +30,4 @@ app.layout = html.Div(children=[
 
 # Run the web app server
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=False, port=8050)

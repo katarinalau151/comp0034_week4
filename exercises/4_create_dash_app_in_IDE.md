@@ -26,10 +26,9 @@ Other files you may see as separate files include: data preparation; figure crea
 
 ## Recreate the example from exercise 3
 Add the following code to app.py.
-There are three changes from the previous code:
+There are two changes from the previous code:
 1. As we will be running this as a Python app rather than a jupyter notebook we will create a Python main function and no longer require the `use_reloader=False` parameter.
-2. The data directory is in a different location relative to the file that is calling it so this has been changed. A further import was also required for this (`import os`)
-3. The assets directory contains w3.css, this stylesheet is used in the app
+2. The data directory is in a different location relative to the file that is calling it so this has been changed. A further import is also required for this (`import os`)
 ```python
 # Import the required libraries.
 import dash
@@ -63,7 +62,7 @@ app.layout = html.Div(children=[
 
 # Run the web app server
 if __name__ == '__main__':
-    app.run_server(debug=False) 
+    app.run_server(debug=False, port=8050) 
 ```
 
 Run the app and then go to URL your IDE gives you, likely to be http://127.0.0.1:8050/ by default.
