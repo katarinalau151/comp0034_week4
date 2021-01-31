@@ -9,7 +9,7 @@ A typical structure for a Dash app might be:
 
 ```
 dash_app_name/
-  /assets/  # An optional directory that contains CSS stylesheets, images, or custom JavaScript files. Dash will automatically serve all of the files that are included in this folder.
+  /assets/  # An optional directory that contains CSS stylesheets and images. Dash will automatically serve all of the files that are included in this folder.
       app.css  
   /data/  # An optional directory that contains the data files (unless this is accessed via an API or database server).
       data.csv
