@@ -4,17 +4,17 @@ from dash import html
 from dash import dcc
 from dash import dash_table
 import dash_bootstrap_components as dbc
-import create_charts_end as cce
+import create_charts as cc
 
-fig_line_sports = cce.line_chart_sports()
-fig_sb_gender_winter = cce.stacked_bar_gender("Winter")
-fig_sb_gender_summer = cce.stacked_bar_gender("Summer")
-fig_scatter_mapbox_OSM = cce.scatter_mapbox_para_locations("OSM")
-fig_scatter_mapbox_USGS = cce.scatter_mapbox_para_locations("USGS")
-df_medals_data = cce.top_ten_gold_data()
-fig_top_ten_gold = cce.table_top_ten_gold_table(df_medals_data)
-df_medals = cce.get_medals_table_data('London', 2012)
-fig_cp_map_medals = cce.choropleth_mapbox_medals(df_medals)
+fig_line_sports = cc.line_chart_sports()
+fig_sb_gender_winter = cc.stacked_bar_gender("Winter")
+fig_sb_gender_summer = cc.stacked_bar_gender("Summer")
+fig_scatter_mapbox_OSM = cc.scatter_mapbox_para_locations("OSM")
+fig_scatter_mapbox_USGS = cc.scatter_mapbox_para_locations("USGS")
+df_medals_data = cc.top_ten_gold_data()
+fig_top_ten_gold = cc.table_top_ten_gold_table(df_medals_data)
+df_medals = cc.get_medals_table_data('London', 2012)
+fig_cp_map_medals = cc.choropleth_mapbox_medals(df_medals)
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SKETCHY])
 
@@ -71,7 +71,7 @@ app.layout = dbc.Container(
         html.P('Medal performance in London 2012'),
         dcc.Graph(
             id='cp-map-medals',
-            fig=fig_cp_map_medals
+            figure=fig_cp_map_medals
         ),
 
     ],
@@ -79,4 +79,4 @@ app.layout = dbc.Container(
 )
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=8888)
+    app.run_server(debug=True)

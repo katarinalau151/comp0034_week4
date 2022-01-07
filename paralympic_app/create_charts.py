@@ -87,17 +87,17 @@ def stacked_bar_gender(event_type):
 
 def get_country_results(NOC_code):
     """
-    Adds the summer/winter event_type column to the medals data for a specified country and returns the merged data as a
-    dataframe.
+    Adds the summer/winter event_type column to the medals' data for a specified country and returns the merged data
+    as a dataframe.
     :param NOC_code: NOC three digit country code
-    :return: DataFrame with the medals data for all years for the specified country
+    :return: DataFrame with the medal data for all years for the specified country
     """
     df = pd.read_csv(MEDALS_DATA_FILEPATH)
     df_event = pd.read_csv(EVENT_DATA_FILEPATH, usecols=['TYPE', 'MERGE_COL'])
-    df_merged = df.merge(df_event, how='left', left_on='event', right_on='MERGE_COL')
+    df_merged = df.merge(df_event, how='left', left_on='location', right_on='MERGE_COL')
     df_sorted = df_merged.sort_values(by=['NPC', 'year'])
     df_country = df_sorted.loc[df_sorted['NPC'] == NOC_code]
-    df_country['event-year'] = df_country['event'] + ' ' + df_country['year'].astype(str)
+    df_country['location-year'] = df_country['location'] + ' ' + df_country['year'].astype(str)
     return df_country
 
 
@@ -111,7 +111,6 @@ def scatter_mapbox_para_locations(mapbox_type):
     valid = {'OSM', 'USGS'}
     if mapbox_type not in valid:
         raise ValueError("Mapbox type must be one of %r." % valid)
-    cols = ['TYPE', 'YEAR', 'LOCATION', 'LAT', 'LON']
     df_locations = pd.read_csv(EVENT_DATA_FILEPATH)
     fig = px.scatter_mapbox(df_locations,
                             lat='LAT',
@@ -164,7 +163,7 @@ def table_top_ten_gold_table(df):
 def top_ten_gold_data():
     """
         Get the data for the top 10 countries who have won the most medals since 1960
-        :return:
+        :return: dataframe
         """
     cols = ['Country', 'Gold']
     df_gold = pd.read_csv(MEDALS_DATA_FILEPATH, usecols=cols)
@@ -174,33 +173,33 @@ def top_ten_gold_data():
     return df_gold_ten
 
 
-def get_medals_table_data(event, year):
+def get_medals_table_data(location, year):
     """
-    Given a specific paralympic event, display the countries medals as a choropleth map.
-    :return: Plotly Express choropleth map
+    Given a specific paralympic location and year, get the data for the medal results.
+    :return: data frane
     """
     df_medals = pd.read_csv(MEDALS_DATA_FILEPATH)
-    df_medals_event = df_medals[(df_medals['Event'] == event) & (df_medals['Year'] == year)]
+    df_medals_event = df_medals[(df_medals['Event'] == location) & (df_medals['Year'] == year)]
     return df_medals_event
 
 
 def choropleth_mapbox_medals(df):
     """
-    Creates a choropleth map showing medal performance in a given paralympic event
+    Creates a choropleth map showing medal performance of countries in a given paralympic location/year.
 
     :return: Plotly Express choropleth
     """
     geojson_file = Path(__file__).parent.joinpath('data', 'countries.geojson')
     df_geojson = gpd.read_file(geojson_file)
-    max = df['Total'].max()
-    min = df['Total'].min()
+    max_medals = df['Total'].max()
+    min_medals = df['Total'].min()
     fig = px.choropleth_mapbox(df,
                                geojson=df_geojson,
                                locations='NPC',
                                featureidkey="properties.ISO_A3",
                                color='Total',
                                color_continuous_scale="Viridis",
-                               range_color=(min, max),
+                               range_color=(min_medals, max_medals),
                                mapbox_style="carto-positron",
                                zoom=1,
                                center={"lat": 0, "lon": 0},
@@ -211,14 +210,9 @@ def choropleth_mapbox_medals(df):
                                    'NPC': False,
                                    'Gold': True,
                                    'Silver': True,
-                                   'Bronze':True,
+                                   'Bronze': True,
                                    'Total': True
                                },
                                )
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
-    fig.show()
-
-
-if __name__ == '__main__':
-    df_medals = get_medals_table_data('London', 2012)
-    choropleth_mapbox_medals(df_medals)
+    return fig
