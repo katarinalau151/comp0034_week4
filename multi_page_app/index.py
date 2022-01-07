@@ -1,9 +1,9 @@
-import dash_core_components as dcc
-import dash_html_components as html
+# Adapted from https://dash.plotly.com/urls
+from dash import html, dcc
 import dash_bootstrap_components as dbc
-from dash.dependencies import Input, Output
+from dash import Input, Output
 
-from multi_page_app.apps.app1 import app1
+from multi_page_app.apps.app1 import recycle_app
 from multi_page_app.apps.app2 import app2
 
 from multi_page_app.app import app
@@ -11,9 +11,8 @@ from multi_page_app.app import app
 # Add the navbar code here
 navbar = dbc.NavbarSimple(
     children=[
-        dbc.NavItem(dbc.NavLink("Page 1", href="/app1"), id="page-1-link"),
-        dbc.NavItem(dbc.NavLink("Page 2", href="/app2"), id="page-2-link"),
-        dbc.NavItem(dbc.NavLink("Page 3", href="/app3"), id="page-3-link")
+        dbc.NavItem(dbc.NavLink("Page 1", href="/app1"), id="app-1-link"),
+        dbc.NavItem(dbc.NavLink("Page 2", href="/app2"), id="app-2-link")
     ],
     brand="Multi page app example",
     brand_href="/",
@@ -28,14 +27,15 @@ app.layout = html.Div([
 ])
 
 index_layout = html.Div([
-    html.P('Hello')
+    html.P('This is a multi-page Dash app')
 ])
 
 
-@app.callback(Output('page-content', 'children'), [Input('url', 'pathname')])
+@app.callback(Output('page-content', 'children'),
+              Input('url', 'pathname'))
 def display_page(pathname):
     if pathname == '/app1':
-        return app1.layout
+        return recycle_app.layout
     elif pathname == '/app2':
         return app2.layout
     elif pathname == '/':

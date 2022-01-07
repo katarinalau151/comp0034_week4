@@ -1,10 +1,11 @@
-import dash
 import dash_bootstrap_components as dbc
 from dash import dcc, Output, Input
 from dash import html
 
-from recyclingdata import RecyclingData
-from recyclingchart import RecyclingChart
+from multi_page_app.apps.app1.recyclingchart import RecyclingChart
+from multi_page_app.apps.app1.recyclingdata import RecyclingData
+
+from multi_page_app.app import app
 
 # Prepare the data set
 data = RecyclingData()
@@ -15,11 +16,8 @@ data.process_data_for_area(area)
 rc = RecyclingChart(data)
 fig_rc = rc.create_chart(area)
 
-# Create a Dash app (using bootstrap).
-app = dash.Dash(external_stylesheets=[dbc.themes.LUX])
-
 # Create the app layout using Bootstrap fluid container
-app.layout = dbc.Container(fluid=True, children=[
+layout = dbc.Container(fluid=True, children=[
     dbc.Row(
         dbc.Col(children=[html.Br(),
                           html.H1('Waste and recycling'),
@@ -75,7 +73,3 @@ def render_output_panel(area_select):
 def update_recycling_chart(area_select):
     fig_rc = rc.create_chart(area_select)
     return fig_rc
-
-
-if __name__ == '__main__':
-    app.run_server(debug=True)
