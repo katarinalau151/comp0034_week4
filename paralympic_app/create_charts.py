@@ -9,43 +9,30 @@ EVENT_DATA_FILEPATH = Path(__file__).parent.joinpath('data', 'paralympics.csv')
 MEDALS_DATA_FILEPATH = Path(__file__).parent.joinpath('data', 'all_medals.csv')
 
 
-def line_chart_sports():
+def line_chart_over_time(chart_type):
     """
-    Creates a line chart showing change in the number of sports in the summer and winter paralympics over time
-    An example for exercise 1.
-
-    TODO: Add checkbox to choose Winter, Summer or both (Lab 4 - interactivity)
+    Creates a line chart showing change in the number of the given parameter in the summer and winter paralympics over
+    time. Options are 'EVENTS', 'SPORTS', 'COUNTRIES', 'PARTICIPANTS'
 
     :return: Plotly Express line chart
     """
-    cols = ['REF', 'TYPE', 'YEAR', 'LOCATION', 'EVENTS', 'SPORTS', 'COUNTRIES', 'MALE', 'FEMALE', 'PARTICIPANTS']
+    cols = ['REF', 'TYPE', 'YEAR', 'LOCATION', 'EVENTS', 'SPORTS', 'COUNTRIES', 'PARTICIPANTS']
     df_events = pd.read_csv(EVENT_DATA_FILEPATH, usecols=cols)
+    title_text = f"Has the number of {chart_type.lower()} changed over time?"
+    fig_line = px.line(df_events,
+                       x='YEAR',
+                       y=chart_type,
+                       color='TYPE',
+                       text='YEAR',
+                       title=title_text,
+                       labels={'YEAR': '', chart_type: '', 'TYPE': ''},
+                       template="simple_white"
+                       )
 
-    # px line charts https://plotly.com/python/line-charts/
-    # Styling figures with px https://plotly.com/python/styling-plotly-express/
-    line_events = px.line(df_events,
-                          x='YEAR',
-                          y='EVENTS',
-                          color='TYPE',
-                          text='YEAR',
-                          title='Have the number of events changed over time?',
-                          labels={'YEAR': '', 'EVENTS': 'Number of events', 'TYPE': ''},
-                          template="simple_white"
-                          )
+    fig_line.update_xaxes(showticklabels=False, ticklen=0)
+    fig_line.update_traces(textposition="bottom right")
 
-    # Add an annotation https://plotly.com/python/text-and-annotations/
-    line_events.add_annotation(
-        text='Event in multiple locations, Stoke Mandeville and New York',
-        x='1984',
-        y=975,
-        showarrow=True,
-        arrowhead=2
-    )
-
-    # Remove the x-axis labels and tick lines
-    line_events.update_xaxes(showticklabels=False, ticklen=0)
-
-    return line_events
+    return fig_line
 
 
 def stacked_bar_gender(event_type):
@@ -65,8 +52,6 @@ def stacked_bar_gender(event_type):
     # Add new columns that each contain the result of calculating the % of male and female participants
     df_events['M%'] = df_events['MALE'] / df_events['PARTICIPANTS']
     df_events['F%'] = df_events['FEMALE'] / df_events['PARTICIPANTS']
-    # df_events['M%'] = round(df_events['M%'] * 100, 0)
-    # df_events['F%'] = round(df_events['F%'] * 100, 0)
     # Sort the values by Type and Year
     df_events.sort_values(['TYPE', 'YEAR'], ascending=(True, True), inplace=True)
     # Create a new column that combines Location and Year to use as the x-axis
@@ -144,7 +129,18 @@ def scatter_mapbox_para_locations(mapbox_type):
             ])
 
     fig.update_layout(margin={"r": 5, "t": 5, "l": 5, "b": 5})
+    fig.update_traces(marker_size=20)
+
     return fig
+
+
+def get_event_highlights(location, year):
+    cols = ['LOCATION', 'YEAR', 'HIGHLIGHTS']
+    dtypes = {'YEAR': 'int'}
+    df_highlights = pd.read_csv(EVENT_DATA_FILEPATH, usecols=cols, dtype=dtypes)
+    highlight = df_highlights[(df_highlights['LOCATION'] == location) & (df_highlights['YEAR'] == year)]
+    highlight_text = highlight.iloc[0, 2]
+    return highlight_text
 
 
 def table_top_ten_gold_table(df):

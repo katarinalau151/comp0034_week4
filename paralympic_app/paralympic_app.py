@@ -6,7 +6,7 @@ from dash import dash_table
 import dash_bootstrap_components as dbc
 import create_charts as cc
 
-fig_line_sports = cc.line_chart_sports()
+fig_line_time = cc.line_chart_over_time('EVENTS')
 fig_sb_gender_winter = cc.stacked_bar_gender("Winter")
 fig_sb_gender_summer = cc.stacked_bar_gender("Summer")
 fig_scatter_mapbox_OSM = cc.scatter_mapbox_para_locations("OSM")
@@ -23,26 +23,38 @@ app.layout = dbc.Container(
         html.H1("Paralympic History"),
         html.H2("Has the number of athletes, nations, events and sports changed over time?"),
         dcc.Graph(
-            id='line-sports',
-            figure=fig_line_sports
+            id='line-chart-time',
+            figure=fig_line_time
         ),
 
         html.H2("Has the ratio of male and female athletes changed over time?"),
-        dcc.Graph(
-            id='stacked-bar-gender-win',
-            figure=fig_sb_gender_winter
-        ),
-        dcc.Graph(
-            id='stacked-bar-gender-sum',
-            figure=fig_sb_gender_summer
-        ),
+        html.Div([
+            dcc.Graph(
+                id='stacked-bar-gender-win',
+                figure=fig_sb_gender_winter
+            )
+        ], style={'display': 'block'}),
+        html.Div([
+            dcc.Graph(
+                id='stacked-bar-gender-sum',
+                figure=fig_sb_gender_summer
+            )
+        ], style={'display': 'block'}),
 
         html.H2("Where in the world have the Paralympics have been held?"),
-        html.P("OpenStreetMap version"),
-        dcc.Graph(
-            id='scatter-mapbox-osm',
-            figure=fig_scatter_mapbox_OSM
-        ),
+        dbc.Row([
+            dbc.Col(width=3, children=[
+                html.H3('Event highlights'),
+                html.P('Hover over the points in the map to see the event highlights', id='highlight-text')
+            ]),
+            dbc.Col(width=9, children=[
+                dcc.Graph(
+                    id='scatter-mapbox-osm',
+                    figure=fig_scatter_mapbox_OSM
+                ),
+            ]),
+        ]),
+
         html.P("United States Geological Survey (USGS) version"),
         dcc.Graph(
             id='scatter-mapbox-usgs',
