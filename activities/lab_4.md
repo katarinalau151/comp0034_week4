@@ -220,10 +220,16 @@ needs to be displayed in the `html.P('Click...', id='highlight-text')` element.
 
 The hover data from the graph is returned as json so you will need to `import json`.
 
+You will need to work out how to access elements of the json array for this callback, expect this exercise to be more
+challenging!
+
 ## Further practice
+There are a couple of tables and a choropleth map in the example. See if you can add interactivity to one of these.
 
 A selection of online tutorials for further practice:
 
 - [Creating powerful Pythonic dashboards with Dash - Part 1: Development](https://www.linkedin.com/pulse/creating-powerful-pythonic-dashboards-dash-part-1-russo-%E9%A9%AC%E9%87%8C%E5%A5%A5-)
+- [Develop Data Visualization Interfaces in Python With Dash](https://realpython.com/python-dash/)
+- [6 Steps to Interactive Python Dashboards with Plotly Dash](https://www.justintodata.com/python-interactive-dashboard-with-plotly-dash-tutorial/)
 - [The Dash Callback - Input, Output, State, and more, Charming Data channel, YouTube](https://www.youtube.com/watch?v=mTsZL-VmRVE)
   This series of video tutorials is well presented and easy to understand.

@@ -18,9 +18,6 @@ fig_cp_map_medals = cc.choropleth_mapbox_medals(df_medals)
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SKETCHY])
 
-# Disable callback verification, this allows components that aren't in the intial layout but are added by callbacks
-app.config.suppress_callback_exceptions = True
-
 app.layout = dbc.Container(
     [
         html.H1("Paralympic History"),
@@ -109,10 +106,10 @@ app.layout = dbc.Container(
 
         html.H2("What is the medal performance of each country?"),
         html.P('Medal performance in London 2012'),
-         dcc.Graph(
+        dcc.Graph(
             id='cp-map-medals',
             figure=fig_cp_map_medals
-         ),
+        ),
 
     ],
     fluid=True,
