@@ -1,8 +1,9 @@
 # Helper functions for creating the charts in the activities
+import json
+
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objs as go
-import geopandas as gpd
 from pathlib import Path
 
 EVENT_DATA_FILEPATH = Path(__file__).parent.joinpath('data', 'paralympics.csv')
@@ -186,11 +187,12 @@ def choropleth_mapbox_medals(df):
     :return: Plotly Express choropleth
     """
     geojson_file = Path(__file__).parent.joinpath('data', 'countries.geojson')
-    df_geojson = gpd.read_file(geojson_file)
+    with open(geojson_file) as f:
+        geojson = json.load(f)
     max_medals = df['Total'].max()
     min_medals = df['Total'].min()
     fig = px.choropleth_mapbox(df,
-                               geojson=df_geojson,
+                               geojson=geojson,
                                locations='NPC',
                                featureidkey="properties.ISO_A3",
                                color='Total',
