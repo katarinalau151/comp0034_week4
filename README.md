@@ -2,9 +2,9 @@
 
 ## Activities and guides
 
-1. [Lab 4 instructions](/activities/lab_4.md)
-2. [Introduction to interactivity in Dash](/activities/1_dash_interactivity_intro.md)
-3. [Creating a multi-page Dash app](/activities/2_multi_page_dash_app.md)
+1. [Lab 4 instructions](activities/lab_4.md)
+2. [Introduction to interactivity in Dash](activities/1_dash_interactivity_intro.md)
+3. [Creating a multi-page Dash app](activities/2_multi_page_dash_app.md)
 
 ## Set-up
 
