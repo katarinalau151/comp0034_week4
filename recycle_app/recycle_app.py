@@ -1,7 +1,5 @@
-import dash
+from dash import Dash, dcc, html
 import dash_bootstrap_components as dbc
-from dash import dcc
-from dash import html
 
 from recyclingdata import RecyclingData
 from recyclingchart import RecyclingChart
@@ -16,7 +14,7 @@ rc = RecyclingChart(data)
 fig_rc = rc.create_chart(area)
 
 # Create a Dash app (using bootstrap).
-app = dash.Dash(external_stylesheets=[dbc.themes.LUX])
+app = Dash(external_stylesheets=[dbc.themes.LUX])
 
 # Create the app layout using Bootstrap fluid container
 app.layout = dbc.Container(fluid=True, children=[
