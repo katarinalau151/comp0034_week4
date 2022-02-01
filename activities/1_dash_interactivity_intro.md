@@ -270,8 +270,17 @@ def update_recycling_chart(area_select):
 You have now gone from a static recycling chart to one that a user can interact with to explore the recycling in
 different areas.
 
+## Modify the callback so that there is a single callback with one Input and two Outputs
+
+Read the [documentation at this page](https://dash.plotly.com/basic-callbacks) and scroll down to find the 'Dash App
+With Multiple Outputs' section.
+
+Restructure the callbacks so there is a single callback with one Input and two Outputs.
+
 ## Full code listing
+
 The full code for the final `recycle_app.py` is:
+
 ```python
 import dash
 import dash_bootstrap_components as dbc
