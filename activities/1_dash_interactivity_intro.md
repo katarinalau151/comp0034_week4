@@ -150,6 +150,7 @@ The code now looks like this:
 
 ### Add a callback so that the statistics panel is displayed when an area is selected
 
+#### Overview of callbacks
 While you can use the area selector dropdown, nothing happens when you select an area.
 
 A **callback function** is a Python function that is automatically called by Dash whenever an input component's property
@@ -189,13 +190,14 @@ To create a callback:
 - **Define the Outputs**. Identify the component id and property that will be updated after we make a change.
 - **Write a Python function using the @callback decorator**. The function will be run when the Input has been selected.
 
-1. Write code to update the statistics card when the area dropdown selection is changed.
+#### Using a callback to update the statistics card when the area dropdown selection is changed
 
 - Import the classes for Input and Output from dash e.g. add to the import `from dash import dcc, Input, Output`.
 
 - **Define the Input**: Look at the first column of the second row in the app layout. You should see the dropdown with
   an `id=area_select'` and the item that is selected from the list is the `value=`
-  parameter. So, we can reference the country that is selected as `Input("area-select","value")`
+  parameter. So, we can reference the country that is selected as `Input("area-select","value")`. For more guidance on
+  dropdowns [refer to the documentation](https://dash.plotly.com/dash-core-components/dropdown).
 
 - **Define the Outputs**: The last line of the first column in the app layout added a placeholder
   div: `html.Div(id="stats-card")`. We want to output a Bootstrap card with the statistics in and place it in this div,
