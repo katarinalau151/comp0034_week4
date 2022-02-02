@@ -166,14 +166,13 @@ The callback should respond to changes in the checkbox and display or hide the r
 
 This time we have two outputs; the two charts. You will need to find the 'ids' of these.
 
-To provide two outputs they need to be provided as a list `[]` e.g.
+To provide two (or more) outputs e.g.
 
 ```python
 @app.callback(
-    [Output("my-id-1", "style"),
-     Output("my-id-2", "style")],
-    Input("my-checklist", "value"),
-)
+    Output("my-id-1", "style"),
+    Output("my-id-2", "style"),
+    Input("my-checklist", "value"))
 ```
 
 Rather than changing the 'figure' property, this time you will change the 'style' property to hide/show the figure.
@@ -224,6 +223,7 @@ You will need to work out how to access elements of the json array for this call
 challenging!
 
 ## Further practice
+
 There are a couple of tables and a choropleth map in the example. See if you can add interactivity to one of these.
 
 A selection of online tutorials for further practice:
